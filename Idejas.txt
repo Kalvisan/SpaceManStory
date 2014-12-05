@@ -1,0 +1,2 @@
+Visas idejas un ieceres priekš spēles CircleStory:
+	- Izveidot SpriteSheet
