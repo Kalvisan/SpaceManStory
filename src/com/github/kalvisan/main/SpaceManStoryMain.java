@@ -1,7 +1,8 @@
-package com.github.kalvisan;
+package com.github.kalvisan.main;
 
 import java.awt.Canvas;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
@@ -10,18 +11,18 @@ import javax.swing.JFrame;
  * @author Kalvisan
  * @since 06.12.2014.
  */
-public class CircleStoryMain extends Canvas implements Runnable { // Runnable metode ļauj programmu darbināt atkārtoti ar nepartrauktu loop sistēmu // Canvas ļauj piekļūt grafiskajai videi
+public class SpaceManStoryMain extends Canvas implements Runnable { // Runnable metode ļauj programmu darbin�?t atk�?rtoti ar nepartrauktu loop sistēmu // Canvas ļauj piekļūt grafiskajai videi
 	private static final long	serialVersionUID	= 1L;
 	private final static double	version				= 0.1;
 
 	public static final int		WIDTH				= 360;
 	public static final int		HEIGHT				= 240;
-	public static final int		SCALE				= 2;		// Palīdz mainīt izmērus grafiskajā vidē
+	public static final int		SCALE				= 2;		// Palīdz mainīt izmērus grafiskaj�? vidē
 
-	public static boolean		running				= false;	// Parbauda vai programma vēl strādā, ja nē tad izslēdz
-	public Thread				gameThread;					// Ļauj veidot multi tasking, jeb vairākas funkcijas vienlaikus
+	public static boolean		running				= false;	// Parbauda vai programma vēl str�?d�?, ja nē tad izslēdz
+	public Thread				gameThread;					// Ļauj veidot multi tasking, jeb vair�?kas funkcijas vienlaikus
 
-	public synchronized void start() { // Sāk Thread classi, kas tiek atkārtota nepārtraukti
+	public synchronized void start() { // S�?k Thread classi, kas tiek atk�?rtota nep�?rtraukti
 		if (running) return;
 		running = true;
 
@@ -41,13 +42,13 @@ public class CircleStoryMain extends Canvas implements Runnable { // Runnable me
 
 	public void run() {
 		long lastTime = System.nanoTime();			//
-		final double amountOfTicks = 60D;			// Izveido 60 FPS sistemu, kas ļauj uz visiem datoriem darbināt programmu uz 60 fps (60D laikam 60FPS) 
+		final double amountOfTicks = 60D;			// Izveido 60 FPS sistemu, kas ļauj uz visiem datoriem darbin�?t programmu uz 60 fps (60D laikam 60FPS) 
 		double ns = 1000000000 / amountOfTicks;		//
 		double delta = 0;							//
 		
 		while(running){
 			long now = System.nanoTime();			//
-			delta += (now - lastTime) / ns;			// Reķināšana priekš FPS
+			delta += (now - lastTime) / ns;			// Reķin�?šana priekš FPS
 			lastTime = now;							//
 			if(delta >= 1){
 				tick();
@@ -58,7 +59,7 @@ public class CircleStoryMain extends Canvas implements Runnable { // Runnable me
 		stop();
 	}
 
-	private void tick() { // Ļauj apdeitot visas uz ekrāda atrodošās bildes un visu atjaunināt, kas ir nepieciešams
+	private void tick() { // Ļauj apdeitot visas uz ekr�?da atrodoš�?s bildes un visu atjaunin�?t, kas ir nepieciešams
 		
 	}
 	
@@ -68,18 +69,24 @@ public class CircleStoryMain extends Canvas implements Runnable { // Runnable me
 			createBufferStrategy(3); // Ne vairak pa 15!
 			return;
 		}
+		Graphics g = bs.getDrawGraphics();
+							// ------------ RENDER HERE ----------------
+			g.fillRect(0, 0, WIDTH * SCALE, HEIGHT * SCALE- 100);
+							// ------------ END RENDER ----------------
+		g.dispose();
+		bs.show();
 	}
 
 	public static void main(String[] args) {
-		CircleStoryMain game = new CircleStoryMain();
+		SpaceManStoryMain game = new SpaceManStoryMain();
 		game.setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		game.setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		game.setMaximumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 
-		JFrame frame = new JFrame("Circle Story v" + version);
+		JFrame frame = new JFrame("TITLE RPG Story v" + version);
 		frame.setSize(WIDTH * SCALE, HEIGHT * SCALE); // Izveido logu ar noteiktu izmēru
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Izslēdz programmu kad tiek nospiesta izslēgšanās poga
-		frame.setLocationRelativeTo(null); // Novieto programmu ekrāna vidū
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Izslēdz programmu kad tiek nospiesta izslēgšan�?s poga
+		frame.setLocationRelativeTo(null); // Novieto programmu ekr�?na vidū
 		frame.setResizable(false); // Neļauj mainīt programmas izmērus
 		frame.add(game);
 		frame.setVisible(true); // Padara programmas vidi redzamu
