@@ -18,4 +18,8 @@ public class Wall1Tile extends Tile {
 	public void render(Graphics g, int x, int y) {
 		g.drawImage(im.wall1Tile, x, y, RPGGameMain.TILESIZE * RPGGameMain.SCALE, RPGGameMain.TILESIZE * RPGGameMain.SCALE, null);
 	}
+	
+	public boolean isSolid(){
+		return true;
+	}
 }

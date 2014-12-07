@@ -35,8 +35,7 @@ public class RPGGameMain extends Canvas implements Runnable { // Runnable metode
 	private static ImageManager im;
 	
 	private static Player player;
-	
-	private Level l1;
+	private static Level level;
 	
 	public void init(){
 		ImageLoader loader = new ImageLoader();
@@ -46,13 +45,11 @@ public class RPGGameMain extends Canvas implements Runnable { // Runnable metode
 		
 		im = new ImageManager(ss);
 		
-		player = new Player(0, 0, im);
-		
-		BufferedImage limage = loader.load("/level_1.png");
-		l1 = new Level(limage);
+		player = new Player(WIDTH * SCALE / 2 - 32, HEIGHT * SCALE / 2 - 32, im); // Speletaja ekrana X un Y koordinatas
 		
 		this.addKeyListener(new KeyManager());
 		
+		level = new Level(loader.load("/level_1.png"));
 	}
 
 	public synchronized void start() { // S�?k Thread classi, kas tiek atk�?rtota nep�?rtraukti
@@ -108,7 +105,7 @@ public class RPGGameMain extends Canvas implements Runnable { // Runnable metode
 			g.setColor(new Color(47,129,54));
 			g.fillRect(0, 0, WIDTH * SCALE, HEIGHT * SCALE);
 			
-			l1.render(g);
+			level.render(g);
 			player.render(g);
 							// ------------ END RENDER ----------------
 		g.dispose();
@@ -130,6 +127,10 @@ public class RPGGameMain extends Canvas implements Runnable { // Runnable metode
 		frame.setVisible(true); // Padara programmas vidi redzamu
 
 		game.start();
+	}
+	
+	public static Level getLevel() {
+		return level;
 	}
 	
 	public static  Player getPlayer(){
