@@ -1,6 +1,7 @@
 package com.github.kalvisan.main;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
@@ -12,26 +13,30 @@ import com.github.kalvisan.entities.Player;
 import com.github.kalvisan.gfx.ImageLoader;
 import com.github.kalvisan.gfx.ImageManager;
 import com.github.kalvisan.gfx.SpriteSheet;
+import com.github.kalvisan.main.levels.Level;
 
 /**
  * @author Kalvisan
  * @since 06.12.2014.
  */
-public class SpaceManStoryMain extends Canvas implements Runnable { // Runnable metode ļauj programmu darbin�?t atk�?rtoti ar nepartrauktu loop sistēmu // Canvas ļauj piekļūt grafiskajai videi
+public class RPGGameMain extends Canvas implements Runnable { // Runnable metode ļauj programmu darbin�?t atk�?rtoti ar nepartrauktu loop sistēmu // Canvas ļauj piekļūt grafiskajai videi
 	private static final long	serialVersionUID	= 1L;
-	private final static double	version				= 0.5;
+	private final static double	version				= 2.2;
 
 	public static final int		WIDTH				= 640; //352
 	public static final int		HEIGHT				= 512; //320
 	public static final int		SCALE				= 1;		// Palīdz mainīt izmērus grafiskaj�? vidē
+	public static final int		TILESIZE			= 32;
 
 	public static boolean		running				= false;	// Parbauda vai programma vēl str�?d�?, ja nē tad izslēdz
 	public Thread				gameThread;					// Ļauj veidot multi tasking, jeb vair�?kas funkcijas vienlaikus
 	
 	private BufferedImage spriteSheet;
-	private ImageManager im;
+	private static ImageManager im;
 	
 	private static Player player;
+	
+	private Level l1;
 	
 	public void init(){
 		ImageLoader loader = new ImageLoader();
@@ -42,6 +47,9 @@ public class SpaceManStoryMain extends Canvas implements Runnable { // Runnable 
 		im = new ImageManager(ss);
 		
 		player = new Player(0, 0, im);
+		
+		BufferedImage limage = loader.load("/level_1.png");
+		l1 = new Level(limage);
 		
 		this.addKeyListener(new KeyManager());
 		
@@ -97,8 +105,10 @@ public class SpaceManStoryMain extends Canvas implements Runnable { // Runnable 
 		}
 		Graphics g = bs.getDrawGraphics();
 							// ------------ RENDER HERE ----------------
+			g.setColor(new Color(47,129,54));
 			g.fillRect(0, 0, WIDTH * SCALE, HEIGHT * SCALE);
 			
+			l1.render(g);
 			player.render(g);
 							// ------------ END RENDER ----------------
 		g.dispose();
@@ -106,7 +116,7 @@ public class SpaceManStoryMain extends Canvas implements Runnable { // Runnable 
 	}
 
 	public static void main(String[] args) {
-		SpaceManStoryMain game = new SpaceManStoryMain();
+		RPGGameMain game = new RPGGameMain();
 		game.setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		game.setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		game.setMaximumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
@@ -124,6 +134,10 @@ public class SpaceManStoryMain extends Canvas implements Runnable { // Runnable 
 	
 	public static  Player getPlayer(){
 		return player;
+	}
+	
+	public static ImageManager getImageManager() {
+		return im;
 	}
 
 }

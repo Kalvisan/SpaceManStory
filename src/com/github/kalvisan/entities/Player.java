@@ -3,7 +3,7 @@ package com.github.kalvisan.entities;
 import java.awt.Graphics;
 
 import com.github.kalvisan.gfx.ImageManager;
-import com.github.kalvisan.main.SpaceManStoryMain;
+import com.github.kalvisan.main.RPGGameMain;
 
 public class Player{
 
@@ -36,6 +36,6 @@ public class Player{
 	}
 
 	public void render(Graphics g) {
-		g.drawImage(im.player, x, y, 32 * SpaceManStoryMain.SCALE, 32 * SpaceManStoryMain.SCALE, null);
+		g.drawImage(im.player, x, y, RPGGameMain.TILESIZE * RPGGameMain.SCALE, RPGGameMain.TILESIZE * RPGGameMain.SCALE, null);
 	}
 }

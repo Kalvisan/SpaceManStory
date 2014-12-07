@@ -2,6 +2,8 @@ package com.github.kalvisan.gfx;
 
 import java.awt.image.BufferedImage;
 
+import com.github.kalvisan.main.RPGGameMain;
+
 public class SpriteSheet {
 	
 	private BufferedImage sheet;
@@ -11,6 +13,6 @@ public class SpriteSheet {
 	}
 	
 	public BufferedImage crop(int col, int row, int w, int h){
-		return sheet.getSubimage(col * 32, row * 32, w, h);
+		return sheet.getSubimage(col * RPGGameMain.TILESIZE, row * RPGGameMain.TILESIZE, w, h);
 	}
 }

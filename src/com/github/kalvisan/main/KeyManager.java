@@ -8,38 +8,38 @@ public class KeyManager implements KeyListener{
 
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_W) {
-			SpaceManStoryMain.getPlayer().up = true;
+			RPGGameMain.getPlayer().up = true;
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_S) {
-			SpaceManStoryMain.getPlayer().dn = true;
+			RPGGameMain.getPlayer().dn = true;
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_D) {
-			SpaceManStoryMain.getPlayer().rt = true;
+			RPGGameMain.getPlayer().rt = true;
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_A) {
-			SpaceManStoryMain.getPlayer().lt = true;
+			RPGGameMain.getPlayer().lt = true;
 		}
 
 	}
 
 	public void keyReleased(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_W) {
-			SpaceManStoryMain.getPlayer().up = false;
+			RPGGameMain.getPlayer().up = false;
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_S) {
-			SpaceManStoryMain.getPlayer().dn = false;
+			RPGGameMain.getPlayer().dn = false;
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_D) {
-			SpaceManStoryMain.getPlayer().rt = false;
+			RPGGameMain.getPlayer().rt = false;
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_A) {
-			SpaceManStoryMain.getPlayer().lt = false;
+			RPGGameMain.getPlayer().lt = false;
 		}
 	}
 
